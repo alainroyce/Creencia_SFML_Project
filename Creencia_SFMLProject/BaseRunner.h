@@ -14,9 +14,11 @@ public:
 
 private:
 
-	sf::RenderWindow window;
+	sf::RenderWindow		window;
 
-	
+	void render();
+	void processEvents();
+	void update(sf::Time elapsedTime);
 };
 
 
