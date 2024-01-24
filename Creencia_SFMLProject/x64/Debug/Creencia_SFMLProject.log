@@ -1,5 +1,4 @@
-﻿  BaseRunner.cpp
-TextureManager.obj : error LNK2005: "private: __cdecl TextureManager::TextureManager(void)" (??0TextureManager@@AEAA@XZ) already defined in TextureDisplay.obj
+﻿TextureManager.obj : error LNK2005: "private: __cdecl TextureManager::TextureManager(void)" (??0TextureManager@@AEAA@XZ) already defined in TextureDisplay.obj
 TextureManager.obj : error LNK2005: "private: void __cdecl TextureManager::countStreamingAssets(void)" (?countStreamingAssets@TextureManager@@AEAAXXZ) already defined in TextureDisplay.obj
 TextureManager.obj : error LNK2005: "public: class sf::Texture * __cdecl TextureManager::getFromTextureMap(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int)" (?getFromTextureMap@TextureManager@@QEAAPEAVTexture@sf@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z) already defined in TextureDisplay.obj
 TextureManager.obj : error LNK2005: "public: static class TextureManager * __cdecl TextureManager::getInstance(void)" (?getInstance@TextureManager@@SAPEAV1@XZ) already defined in TextureDisplay.obj
