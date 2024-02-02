@@ -1,5 +1,7 @@
+
 #pragma once
 #include "AGameObject.h"
+
 
 class IconObject;
 /// <summary>
@@ -24,7 +26,7 @@ private:
 	bool startedStreaming = false;
 
 	int columnGrid = 0; int rowGrid = 0;
-
+	int numDisplayed = 0;
 	const int MAX_COLUMN = 28;
 	const int MAX_ROW = 22;
 

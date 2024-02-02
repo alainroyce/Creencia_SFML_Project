@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include "SFML/Graphics.hpp"
 
+class IExecutionEvent;
 class TextureManager
 {
 public:
@@ -18,6 +19,7 @@ public:
 
 	sf::Texture* getStreamTextureFromList(const int index);
 	int getNumLoadedStreamTextures() const;
+	int getStreamAssetCount() const;
 
 private:
 	TextureManager();
@@ -33,6 +35,8 @@ private:
 	int streamingAssetCount = 0;
 
 	void countStreamingAssets();
+public:
+
 	void instantiateAsTexture(String path, String assetName, bool isStreaming);
 
 };

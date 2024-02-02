@@ -5,6 +5,7 @@
 #include "StringUtils.h"
 #include "IETThread.h"
 
+
 //a singleton class
 TextureManager* TextureManager::sharedInstance = NULL;
 
@@ -44,14 +45,14 @@ void TextureManager::loadSingleStreamAsset(int index)
 	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
 		if (index == fileNum)
 		{
-			//simulate loading of very large file
-			//<code here for thread sleeping. Fill this up only when instructor told so.>
+			
 
+			std::vector <std::string> tokens = StringUtils::split(entry.path().string(), '/');
+			std::string assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
+			TextureManager::getInstance()->instantiateAsTexture(entry.path().string(), assetName, true);
 
-			//<code here for loading asset>
-			String assetName = "";
+			std::cout << "[Texture Manager] Loaded streaming texture: " << assetName << std::endl;
 
-			std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
 			break;
 		}
 
@@ -115,4 +116,15 @@ void TextureManager::instantiateAsTexture(String path, String assetName, bool is
 		this->baseTextureList.push_back(texture);
 	}
 
+}
+
+int TextureManager::getStreamAssetCount() const
+{
+	int count = 0;
+
+	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
+		count++;
+	}
+
+	return count;
 }
