@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include "SFML/Graphics.hpp"
 
-class IExecutionEvent;
+class TextureDisplay;
 class TextureManager
 {
 public:
@@ -13,7 +13,7 @@ public:
 public:
 	static TextureManager* getInstance();
 	void loadFromAssetList(); //loading of all assets needed for startup
-	void loadSingleStreamAsset(int index); //loads a single streaming asset based on index in directory
+	void loadSingleStreamAsset(int index, TextureDisplay* texDisplay); //loads a single streaming asset based on index in directory
 	sf::Texture* getFromTextureMap(const String assetName, int frameIndex);
 	int getNumFrames(const String assetName);
 

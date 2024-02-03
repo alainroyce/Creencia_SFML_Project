@@ -30,6 +30,7 @@ private:
 	const int MAX_COLUMN = 28;
 	const int MAX_ROW = 22;
 
+public:
 	void spawnObject();
 };
 

@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "StringUtils.h"
 #include "IETThread.h"
+#include "StreamAssetLoader.h"
 
 
 //a singleton class
@@ -38,21 +39,29 @@ void TextureManager::loadFromAssetList()
 	}
 }
 
-void TextureManager::loadSingleStreamAsset(int index)
+void TextureManager::loadSingleStreamAsset(int index, TextureDisplay* texDisplay)
 {
 	int fileNum = 0;
 
 	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
 		if (index == fileNum)
 		{
-			
 
+			//simulate loading of very large file
+			//<code here for thread sleeping. Fill this up only when instructor told so.>
+
+			//<code here for loading asset>
+			
+			/*
 			std::vector <std::string> tokens = StringUtils::split(entry.path().string(), '/');
 			std::string assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
 			TextureManager::getInstance()->instantiateAsTexture(entry.path().string(), assetName, true);
-
 			std::cout << "[Texture Manager] Loaded streaming texture: " << assetName << std::endl;
+			*/
 
+			StreamAssetLoader* myThread = new StreamAssetLoader(entry.path().string(), texDisplay);
+			myThread->start();
+			
 			break;
 		}
 

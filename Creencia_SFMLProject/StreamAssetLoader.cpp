@@ -4,11 +4,12 @@
 
 #include "TextureManager.h"
 #include "StringUtils.h"
+#include "TextureDisplay.h"
 
-StreamAssetLoader::StreamAssetLoader(String path, IExecutionEvent* executionEvent)
+StreamAssetLoader::StreamAssetLoader(String path, TextureDisplay* texDisplay)
 {
 	this->path = path;
-	this->execEvent = executionEvent;
+	this->texDisplay = texDisplay;
 }
 
 StreamAssetLoader::~StreamAssetLoader()
@@ -29,7 +30,7 @@ void StreamAssetLoader::run()
 	String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
 
 	TextureManager::getInstance()->instantiateAsTexture(path, assetName, true);
-
+	texDisplay->spawnObject();
 	std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
 
 

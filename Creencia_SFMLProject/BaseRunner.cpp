@@ -13,13 +13,14 @@ const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
 BaseRunner::BaseRunner() :
 	window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "HO: Entity Component", sf::Style::Close) {
-	
+	/*
 	for (int i = 0; i < TextureManager::getInstance()->getStreamAssetCount(); i++)
 	{
 		std::cout << i <<endl;
 		TextureManager::getInstance()->loadSingleStreamAsset(i);
 	}
-	//window.setVerticalSyncEnabled(true); //VSYNC
+	*/
+	
 
 	//load initial textures
 	TextureManager::getInstance()->loadFromAssetList();
@@ -52,10 +53,9 @@ void BaseRunner::run() {
 		}
 
 		render();
-		sf::Time sleepTime = TIME_PER_FRAME - clock.getElapsedTime();
-		if (sleepTime > sf::Time::Zero) {
-			sf::sleep(sleepTime);
-		}
+		
+		window.setFramerateLimit(60);
+		//window.setVerticalSyncEnabled(true); //VSYNC use this if 60hz display mo
 	}
 	
 }
