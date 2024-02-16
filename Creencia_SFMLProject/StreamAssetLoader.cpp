@@ -17,9 +17,10 @@ StreamAssetLoader::~StreamAssetLoader()
 	std::cout << "Destroying stream asset loader. " << std::endl;
 }
 
-void StreamAssetLoader::run()
+void StreamAssetLoader::onStartTask()
 {
 	std::cout << "Running stream asset loader " << std::endl;
+
 	//simulate loading of very large file
 	std::random_device seeder;
 	std::mt19937 engine(seeder());
@@ -33,7 +34,6 @@ void StreamAssetLoader::run()
 	texDisplay->spawnObject();
 	std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
 
-
-	//delete after being done
-	delete this;
 }
+
+

@@ -1,8 +1,4 @@
-﻿  BaseRunner.cpp
-  StreamAssetLoader.cpp
-  TextureDisplay.cpp
-C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureDisplay.cpp(50,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureDisplay.cpp(55,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureDisplay.cpp(56,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+﻿  TextureManager.cpp
+C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureManager.cpp(91,1): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureManager.cpp(106,1): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   Creencia_SFMLProject.vcxproj -> C:\Users\alain\source\repos\Creencia_SFMLProject\x64\Debug\Creencia_SFMLProject.exe

@@ -5,7 +5,7 @@
 #include "StringUtils.h"
 #include "IETThread.h"
 #include "StreamAssetLoader.h"
-
+#include "ThreadPool.h"
 
 //a singleton class
 TextureManager* TextureManager::sharedInstance = NULL;
@@ -22,6 +22,8 @@ TextureManager* TextureManager::getInstance() {
 TextureManager::TextureManager()
 {
 	this->countStreamingAssets();
+	this->threadPool = new ThreadPool("TextureManagerPool", 24);
+	this->threadPool->startScheduler();
 }
 
 void TextureManager::loadFromAssetList()
@@ -60,7 +62,10 @@ void TextureManager::loadSingleStreamAsset(int index, TextureDisplay* texDisplay
 			*/
 
 			StreamAssetLoader* myThread = new StreamAssetLoader(entry.path().string(), texDisplay);
-			myThread->start();
+			this->threadPool->scheduleTask(myThread);
+
+			
+		
 			
 			break;
 		}
