@@ -2,8 +2,7 @@
 #include <unordered_map>
 #include "SFML/Graphics.hpp"
 
-class ThreadPool;
-class TextureDisplay;
+class IExecutionEvent;
 class TextureManager
 {
 public:
@@ -14,13 +13,15 @@ public:
 public:
 	static TextureManager* getInstance();
 	void loadFromAssetList(); //loading of all assets needed for startup
-	void loadSingleStreamAsset(int index, TextureDisplay* texDisplay); //loads a single streaming asset based on index in directory
+	void loadStreamingAssets(); //loading of assets during runtime
+	void loadSingleStreamAsset(int index, IExecutionEvent* executionEvent); //loads a single streaming asset based on index in directory
 	sf::Texture* getFromTextureMap(const String assetName, int frameIndex);
 	int getNumFrames(const String assetName);
 
 	sf::Texture* getStreamTextureFromList(const int index);
 	int getNumLoadedStreamTextures() const;
-	int getStreamAssetCount() const;
+
+	void instantiateAsTexture(String path, String assetName, bool isStreaming);
 
 private:
 	TextureManager();
@@ -36,10 +37,5 @@ private:
 	int streamingAssetCount = 0;
 
 	void countStreamingAssets();
-
-	ThreadPool* threadPool;
-public:
-
-	void instantiateAsTexture(String path, String assetName, bool isStreaming);
 
 };

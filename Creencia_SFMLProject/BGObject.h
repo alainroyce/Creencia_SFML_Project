@@ -1,5 +1,7 @@
 #pragma once
 #include "AGameObject.h"
+#include <SFML/Audio.hpp>
+
 class BGObject : public AGameObject
 {
 public:
@@ -9,5 +11,7 @@ public:
 	void update(sf::Time deltaTime);
 private:
 	const float SPEED_MULTIPLIER = 3000.0f;
+	sf::Music music;
+
 };
 

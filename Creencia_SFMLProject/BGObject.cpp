@@ -9,6 +9,11 @@ BGObject::BGObject(string name) : AGameObject(name)
 
 void BGObject::initialize()
 {
+	if (!this->music.openFromFile("C:\\Users\\alain\\source\\repos\\Creencia_SFMLProject\\Creencia_SFMLProject\\Media\\Audio\\magbalik.ogg"))
+		std::cout << "Audio file not found!";
+	this->music.setLoop(true);
+	this->music.setVolume(50);
+	this->music.play();
 	std::cout << "Declared as " << this->getName() << "\n";
 
 	//assign texture
@@ -30,7 +35,7 @@ void BGObject::update(sf::Time deltaTime)
 {
 	//make BG scroll slowly
 	sf::Vector2f position = this->getPosition();
-	position.y += this->SPEED_MULTIPLIER * deltaTime.asSeconds();
+	position.y += 0.5 * deltaTime.asSeconds();
 	this->setPosition(position.x, position.y);
 
 	sf::Vector2f localPos = this->sprite->getPosition();

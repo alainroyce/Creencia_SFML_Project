@@ -142,6 +142,7 @@
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="IconObject.cpp" />
     <ClCompile Include="IETThread.cpp" />
+    <ClCompile Include="IExecutionEvent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="IconObject.h" />
     <ClInclude Include="IETThread.h" />
+    <ClInclude Include="IExecutionEvent.h" />
     <ClInclude Include="IWorkerAction.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="PoolWorkerThread.h" />
