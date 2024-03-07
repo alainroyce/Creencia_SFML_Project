@@ -22,6 +22,7 @@ TextureManager* TextureManager::getInstance() {
 TextureManager::TextureManager()
 {
 	this->countStreamingAssets();
+
 }
 
 void TextureManager::loadFromAssetList()
@@ -102,6 +103,11 @@ sf::Texture* TextureManager::getStreamTextureFromList(const int index)
 int TextureManager::getNumLoadedStreamTextures() const
 {
 	return this->streamTextureList.size();
+}
+
+int TextureManager::getStreamingAssetCount() const
+{
+	return streamingAssetCount;
 }
 
 void TextureManager::countStreamingAssets()

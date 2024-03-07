@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include "SFML/Graphics.hpp"
 
+//class ThreadPool;
 class IExecutionEvent;
 class TextureManager
 {
@@ -20,7 +21,7 @@ public:
 
 	sf::Texture* getStreamTextureFromList(const int index);
 	int getNumLoadedStreamTextures() const;
-
+	int getStreamingAssetCount() const;
 	void instantiateAsTexture(String path, String assetName, bool isStreaming);
 
 private:
@@ -37,5 +38,5 @@ private:
 	int streamingAssetCount = 0;
 
 	void countStreamingAssets();
-
+	//ThreadPool* threadPool = nullptr;
 };

@@ -143,6 +143,7 @@
     <ClCompile Include="IconObject.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="IExecutionEvent.cpp" />
+    <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="IETThread.h" />
     <ClInclude Include="IExecutionEvent.h" />
     <ClInclude Include="IWorkerAction.h" />
+    <ClInclude Include="LoadingScreen.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="PoolWorkerThread.h" />
     <ClInclude Include="StreamAssetLoader.h" />
