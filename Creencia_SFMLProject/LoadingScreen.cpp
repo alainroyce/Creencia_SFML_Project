@@ -13,11 +13,12 @@ void LoadingScreen::initialize()
 
 		std::cerr << "Failed to load CD texture!" << std::endl;
 	}
+	this->sprite = new sf::Sprite();
+	this->sprite->setTexture(cdTexture);
+	this->sprite->setScale(0.5f, 0.5f);
+	this->sprite->setOrigin(cdTexture.getSize().x / 2.f, cdTexture.getSize().y / 2.f);
 
-	cdSprite.setTexture(cdTexture);
-	cdSprite.setScale(0.5f, 0.5f);
-	cdSprite.setOrigin(cdTexture.getSize().x / 2.f, cdTexture.getSize().y / 2.f);
-	cdSprite.setPosition(BaseRunner::WINDOW_WIDTH - 100.f,BaseRunner:: WINDOW_HEIGHT - 100.f);
+
 }
 
 void LoadingScreen::processInput(sf::Event event)
@@ -28,6 +29,6 @@ void LoadingScreen::processInput(sf::Event event)
 void LoadingScreen::update(sf::Time deltaTime)
 {
 	// Update CD rotation (spinning effect)
-	cdSprite.rotate(100.f * deltaTime.asSeconds());
+	this->sprite->rotate(100.f * deltaTime.asSeconds());
 
 }

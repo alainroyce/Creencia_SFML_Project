@@ -17,7 +17,8 @@ private:
 	sf::Sprite logo;
 	sf::Vector2f velocity;
 	sf::RenderWindow		window;
-	
+	sf::Sprite cdSprite;
+	sf::Texture cdTexture;
 	void render();
 	void processEvents();
 	void update(sf::Time elapsedTime);
