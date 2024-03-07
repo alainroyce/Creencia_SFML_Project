@@ -17,6 +17,8 @@ public:
 	void loadStreamingAssets(); //loading of assets during runtime
 	void loadSingleStreamAsset(int index, IExecutionEvent* executionEvent); //loads a single streaming asset based on index in directory
 	sf::Texture* getFromTextureMap(const String assetName, int frameIndex);
+	sf::Texture* getFromTextureMap(const String assetName);
+
 	int getNumFrames(const String assetName);
 
 	sf::Texture* getStreamTextureFromList(const int index);

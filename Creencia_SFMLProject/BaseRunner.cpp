@@ -11,7 +11,15 @@ const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
 BaseRunner::BaseRunner() :
 	window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "HO: Entity Component", sf::Style::Close) {
+	if (!logoTexture.loadFromFile("C:\\Users\\alain\\source\\repos\\Creencia_SFMLProject\\Creencia_SFMLProject\\Media\\Textures\\Jorbs.png")) {
 
+		std::cerr << "Failed to load logo texture!" << std::endl;
+	}
+
+	logo.setTexture(logoTexture);
+	logo.setScale(0.5f, 0.5f);
+	//logo.setOrigin(logoTexture.getSize().x / 2.f, logoTexture.getSize().y / 2.f);
+	//logo.setPosition(WINDOW_WIDTH - 50.f, WINDOW_HEIGHT - 50.f);
 	TextureManager::getInstance()->loadFromAssetList();
 	LoadingScreen* loading = new LoadingScreen("LoadingScreen");
 	GameObjectManager::getInstance()->addObject(loading);
@@ -23,15 +31,7 @@ BaseRunner::BaseRunner() :
 	GameObjectManager::getInstance()->addObject(bgObject);
 
 	
-	if (!logoTexture.loadFromFile("C:\\Users\\alain\\source\\repos\\Creencia_SFMLProject\\Creencia_SFMLProject\\Media\\Textures\\Jorbs.png")) {
-
-		std::cerr << "Failed to load logo texture!" << std::endl;
-	}
-
-	logo.setTexture(logoTexture);
-	logo.setScale(0.5f, 0.5f);
-	//logo.setOrigin(logoTexture.getSize().x / 2.f, logoTexture.getSize().y / 2.f);
-	//logo.setPosition(WINDOW_WIDTH - 50.f, WINDOW_HEIGHT - 50.f);
+	
 
 
 	

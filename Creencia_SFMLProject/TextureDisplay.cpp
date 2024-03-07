@@ -4,6 +4,8 @@
 #include "BaseRunner.h"
 #include "GameObjectManager.h"
 #include "IconObject.h"
+#include "BGObject.h"
+
 TextureDisplay::TextureDisplay() : AGameObject("TextureDisplay")
 {
 
@@ -48,19 +50,30 @@ void TextureDisplay::update(sf::Time deltaTime)
 
 void TextureDisplay::onAllAssetsLoaded()
 {
-	int numDisplay= 0;
+	BGObject* bgobject = dynamic_cast<BGObject*>(GameObjectManager::getInstance()->findObjectByName("BGObject"));
+	
+
+	cout << "Displayed" << numDisplay << " / "  << numObjectsToSpawn << endl;
 	// Set the time interval between spawning each object
-	static const sf::Time SPAWN_INTERVAL = sf::seconds(0.1f);
+	static const sf::Time SPAWN_INTERVAL = sf::seconds(0.033f);
 
 	// Update the timer
 	this->spawnTimer += BaseRunner::TIME_PER_FRAME;
-
+	String name = "Frame";
+	name = name + std::to_string(numDisplay);
 	// Check if it's time to spawn a new object
 	if (this->spawnTimer >= SPAWN_INTERVAL && numDisplay < numObjectsToSpawn) {
-		this->spawnObject(); // Spawn a new object
+		this->spawnObject(name); // Spawn a new object
 		numDisplay++; // Increment the count of displayed objects
 		this->spawnTimer = sf::Time::Zero; // Reset the spawn timer
 	}
+	else if (!loadDone)
+	{
+		bgobject->isPlay = true;
+		loadDone = true;
+	}
+
+	
 }
 
 void TextureDisplay::onFinishedExecution()
@@ -68,12 +81,12 @@ void TextureDisplay::onFinishedExecution()
 	//this->spawnObject(); //executes spawn once the texture is ready.
 }
 
-void TextureDisplay::spawnObject()
+void TextureDisplay::spawnObject(String name)
 {
 	this->guard.lock();
 
-	String objectName = "Icon_" + to_string(this->iconList.size());
-	IconObject* iconObj = new IconObject(objectName, this->iconList.size());
+	//String objectName = "Icon_" + to_string(this->iconList.size());
+	IconObject* iconObj = new IconObject(name, this->iconList.size());
 	this->iconList.push_back(iconObj);
 
 	//set position
@@ -82,7 +95,7 @@ void TextureDisplay::spawnObject()
 	float y = this->rowGrid * IMG_HEIGHT;
 	iconObj->setPosition(x, y);
 
-	std::cout << "Set position: " << x << " " << y << std::endl;
+	//std::cout << "Set position: " << x << " " << y << std::endl;
 
 	/*
 	this->columnGrid++;

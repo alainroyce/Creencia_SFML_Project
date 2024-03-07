@@ -63,7 +63,7 @@ void TextureManager::loadSingleStreamAsset(int index, IExecutionEvent* execution
 		if (index == fileNum)
 		{
 			String path = entry.path().generic_string();
-			StreamAssetLoader* assetLoader = new StreamAssetLoader(path, executionEvent);
+			StreamAssetLoader* assetLoader = new StreamAssetLoader(path, executionEvent, index);
 			assetLoader->start();
 
 			break;
@@ -83,7 +83,16 @@ sf::Texture* TextureManager::getFromTextureMap(const String assetName, int frame
 		return NULL;
 	}
 }
-
+sf::Texture* TextureManager::getFromTextureMap(const String assetName)
+{
+	if (!this->textureMap[assetName].empty()) {
+		return this->textureMap[assetName][0];
+	}
+	else {
+		std::cout << "[TextureManager] No texture found for " << assetName << std::endl;
+		return NULL;
+	}
+}
 int TextureManager::getNumFrames(const String assetName)
 {
 	if (!this->textureMap[assetName].empty()) {
@@ -99,6 +108,7 @@ sf::Texture* TextureManager::getStreamTextureFromList(const int index)
 {
 	return this->streamTextureList[index];
 }
+
 
 int TextureManager::getNumLoadedStreamTextures() const
 {
