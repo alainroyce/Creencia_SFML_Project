@@ -5,7 +5,10 @@
 #include "TextureDisplay.h"
 #include "FPSCounter.h"
 #include "LoadingScreen.h"
+#include "LoadingBar.h"
 #include"BouncingDVD.h"
+#include "KaraokeNumber.h"
+#include "HomeText.h"
 #include <iostream>
 
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
@@ -18,10 +21,9 @@ BaseRunner::BaseRunner() :
 
 	TextureManager::getInstance()->loadFromAssetList();
 
-
 	TextureDisplay* display = new TextureDisplay();
 	GameObjectManager::getInstance()->addObject(display);
-
+	
 	BGObject* bgObject = new BGObject("BGObject");
 	GameObjectManager::getInstance()->addObject(bgObject);
 
@@ -30,12 +32,20 @@ BaseRunner::BaseRunner() :
 	loading->setScale(0.5, 0.5);
 	GameObjectManager::getInstance()->addObject(loading);
 	
+	/*
 	BouncingDVD* dvd = new BouncingDVD("BouncingLogo");
 	dvd->setScale(0.5, 0.5);
 	GameObjectManager::getInstance()->addObject(dvd);
-
+	*/
+	LoadingBar* loadingbar = new LoadingBar("LoadingBar");
+	loadingbar->setPosition(BaseRunner::WINDOW_WIDTH/2, BaseRunner::WINDOW_HEIGHT -50.0f);
+	GameObjectManager::getInstance()->addObject(loadingbar);
 	
-	/*if (!logoTexture.loadFromFile("C:\\Users\\alain\\source\\repos\\Creencia_SFMLProject\\Creencia_SFMLProject\\Media\\Textures\\Jorbs.png")) {
+	HomeText* hometext = new HomeText("HomeText");
+	hometext->setPosition(BaseRunner::WINDOW_WIDTH / 2, BaseRunner::WINDOW_HEIGHT / 2 - 200);
+	GameObjectManager::getInstance()->addObject(hometext);
+
+	if (!logoTexture.loadFromFile("C:\\Users\\alain\\source\\repos\\Creencia_SFMLProject\\Creencia_SFMLProject\\Media\\Textures\\Jorbs.png")) {
 
 		std::cerr << "Failed to load logo texture!" << std::endl;
 	}
@@ -44,13 +54,16 @@ BaseRunner::BaseRunner() :
 	logo.setScale(0.5f, 0.5f);
 	velocity.x = 100.0f;
 	velocity.y = 100.0f;
-	*/
+	
 
-
-
+	
 	FPSCounter* fpsCounter = new FPSCounter();
 	GameObjectManager::getInstance()->addObject(fpsCounter);
 
+	KaraokeNumber* number = new KaraokeNumber();
+	GameObjectManager::getInstance()->addObject(number);
+
+	
 }
 
 void BaseRunner::run() {
@@ -77,23 +90,44 @@ void BaseRunner::run() {
 void BaseRunner::processEvents()
 {
 	sf::Event event;
-	if (this->window.pollEvent(event)) {
+	while (this->window.pollEvent(event)) {
 		switch (event.type) {
-		default:
-			GameObjectManager::getInstance()->processInput(event);
+		case sf::Event::KeyPressed:
+			// Check if the pressed key is a number key from numpad
+			if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
+				// Convert the key code to actual number
+				int number = event.key.code - sf::Keyboard::Numpad0;
+				//std::cout << "Pressed number: " << number << std::endl;
+				// Update display value
+				//updateDisplay(number);
+			}
 			break;
 		case sf::Event::Closed:
 			this->window.close();
+			break;
+		default:
+			GameObjectManager::getInstance()->processInput(event);
 			break;
 		}
 	}
 }
 
 void BaseRunner::update(sf::Time elapsedTime) {
-	GameObjectManager::getInstance()->update(elapsedTime);
-	
+	GameObjectManager::getInstance()->update(elapsedTime);	
 
-	
+	// Update logo position
+	logo.move(velocity * elapsedTime.asSeconds());
+
+	// Check for bounds collision and reverse velocity if needed
+	if ((logo.getPosition().x + logo.getGlobalBounds().width >= WINDOW_WIDTH && velocity.x > 0) ||
+		(logo.getPosition().x <= 0 && velocity.x < 0)) {
+		velocity.x = -velocity.x; // Reverse X direction
+	}
+	if ((logo.getPosition().y + logo.getGlobalBounds().height >= WINDOW_HEIGHT && velocity.y > 0) ||
+		(logo.getPosition().y <= 0 && velocity.y < 0)) {
+		velocity.y = -velocity.y; // Reverse Y direction
+	}
+
 	
 }
 
@@ -105,6 +139,7 @@ void BaseRunner::render() {
 	window.draw(logo);
 	window.draw(cdSprite);
 
-
 	this->window.display();
 }
+
+

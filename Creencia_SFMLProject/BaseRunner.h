@@ -22,6 +22,17 @@ private:
 	void render();
 	void processEvents();
 	void update(sf::Time elapsedTime);
+
+	int displayValue = 0;
+	int digits[4] = { 0 }; // Array to store individual digits of the displayValue
+
+	// Other members of the class...
+
+	// Function to update the display value and rotate the digits
+	void updateDisplay(int number);
+
+	// SFML Text object for displaying the digits
+	sf::Text displayText;
 };
 
 

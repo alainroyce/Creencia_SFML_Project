@@ -41,7 +41,7 @@ void BGObject::update(sf::Time deltaTime)
 	}
 	//make BG scroll slowly
 	sf::Vector2f position = this->getPosition();
-	position.y += 200 * deltaTime.asSeconds();
+	position.y += 100 * deltaTime.asSeconds();
 	this->setPosition(position.x, position.y);
 
 	sf::Vector2f localPos = this->sprite->getPosition();

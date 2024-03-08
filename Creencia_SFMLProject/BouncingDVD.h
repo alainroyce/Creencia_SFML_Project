@@ -14,5 +14,5 @@ public:
 	void update(sf::Time deltaTime);
 	sf::Texture logoTexture;
 	sf::Vector2f velocity;
-	
+	sf::Vector2i direction;
 };

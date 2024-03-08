@@ -141,9 +141,12 @@
     <ClCompile Include="BouncingDVD.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="HomeText.cpp" />
     <ClCompile Include="IconObject.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="IExecutionEvent.cpp" />
+    <ClCompile Include="KaraokeNumber.cpp" />
+    <ClCompile Include="LoadingBar.cpp" />
     <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
@@ -161,10 +164,13 @@
     <ClInclude Include="BouncingDVD.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="HomeText.h" />
     <ClInclude Include="IconObject.h" />
     <ClInclude Include="IETThread.h" />
     <ClInclude Include="IExecutionEvent.h" />
     <ClInclude Include="IWorkerAction.h" />
+    <ClInclude Include="KaraokeNumber.h" />
+    <ClInclude Include="LoadingBar.h" />
     <ClInclude Include="LoadingScreen.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="PoolWorkerThread.h" />

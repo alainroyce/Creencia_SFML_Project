@@ -5,6 +5,7 @@
 #include "GameObjectManager.h"
 #include "IconObject.h"
 #include "BGObject.h"
+#include "FPSCounter.h"
 
 TextureDisplay::TextureDisplay() : AGameObject("TextureDisplay")
 {
@@ -23,12 +24,13 @@ void TextureDisplay::processInput(sf::Event event)
 
 void TextureDisplay::update(sf::Time deltaTime)
 {
-	std::cout << TextureManager::getInstance()->getNumLoadedStreamTextures() << endl;
+	//std::cout << TextureManager::getInstance()->getNumLoadedStreamTextures() << endl;
 	this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
 
 	if (TextureManager::getInstance()->getNumLoadedStreamTextures() == TextureManager::getInstance()->getStreamingAssetCount()) {
 		cout << "ALLASSETSLOADED" << endl;
 		this->onAllAssetsLoaded();
+
 	}
 	if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 	{
@@ -71,6 +73,21 @@ void TextureDisplay::onAllAssetsLoaded()
 	{
 		bgobject->isPlay = true;
 		loadDone = true;
+
+		
+	}
+	else if (numDisplay == numObjectsToSpawn)
+	{
+		numDisplay = 0;
+		loadDone = false;
+		std::cout << "Before: " << GameObjectManager::getInstance()->activeObjects() << std::endl;
+		for (int i = 0; i < numObjectsToSpawn; i++)
+		{
+			String name = "Frame";
+			name = name + std::to_string(i);
+			GameObjectManager::getInstance()->deleteObjectByName(name);
+		}
+		std::cout << "After: " << GameObjectManager::getInstance()->activeObjects() << std::endl;
 	}
 
 	

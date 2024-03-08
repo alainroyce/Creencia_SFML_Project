@@ -17,6 +17,8 @@ void LoadingScreen::initialize()
 	this->sprite->setTexture(cdTexture);
 	this->sprite->setScale(0.5f, 0.5f);
 	this->sprite->setOrigin(cdTexture.getSize().x / 2.f, cdTexture.getSize().y / 2.f);
+	
+	
 
 
 }

@@ -23,7 +23,7 @@ private:
 	typedef std::vector<IconObject*> IconList;
 	typedef std::mutex Mutex;
 	IconList iconList;
-	int numObjectsToSpawn = 1543;
+	int numObjectsToSpawn = 1942;
 	enum StreamingType { BATCH_LOAD = 0, SINGLE_STREAM = 1 };
 	const float STREAMING_LOAD_DELAY = 25.0f; //greatly reduce streaming load delay to demonstrate performance drop.
 	const StreamingType streamingType = SINGLE_STREAM;

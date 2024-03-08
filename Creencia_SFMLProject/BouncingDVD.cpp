@@ -1,4 +1,5 @@
 #include "BouncingDVD.h"
+#include <iostream>
 
 BouncingDVD::BouncingDVD(sf::String name) : AGameObject(name)
 {
@@ -12,9 +13,12 @@ void BouncingDVD::initialize()
 	}
 	this->sprite = new sf::Sprite();
 	this->sprite->setTexture(logoTexture);
-	this->sprite->setPosition(100, 100);
+	//this->sprite->setPosition(100, 100);
+
+	// Set initial velocity
 	velocity.x = 100.0f;
 	velocity.y = 100.0f;
+	
 }
 
 void BouncingDVD::processInput(sf::Event event)
@@ -23,16 +27,17 @@ void BouncingDVD::processInput(sf::Event event)
 
 void BouncingDVD::update(sf::Time elapsedTime)
 {
-	// Update logo position
+  
 	this->sprite->move(velocity * elapsedTime.asSeconds());
 
 	// Check for bounds collision and reverse velocity if needed
-	if ((sprite->getPosition().x + sprite->getGlobalBounds().width >= 1920 && velocity.x > 0) ||
-		(sprite->getPosition().x <= 0 && velocity.x < 0)) {
+	if ((this->sprite->getPosition().x + this->sprite->getGlobalBounds().width >= 1920 && velocity.x > 0) ||
+		(this->sprite->getPosition().x <= 0 && velocity.x < 0)) {
 		velocity.x = -velocity.x; // Reverse X direction
 	}
-	if ((sprite->getPosition().y + sprite->getGlobalBounds().height >= 1080 && velocity.y > 0) ||
-		(sprite->getPosition().y <= 0 && velocity.y < 0)) {
+	if ((this->sprite->getPosition().y + this->sprite->getGlobalBounds().height >= 1080 && velocity.y > 0) ||
+		(this->sprite->getPosition().y <= 0 && velocity.y < 0)) {
 		velocity.y = -velocity.y; // Reverse Y direction
 	}
+
 }
