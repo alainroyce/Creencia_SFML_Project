@@ -111,7 +111,7 @@ void TextureDisplay::spawnObject(String name)
 	float x = this->columnGrid * IMG_WIDTH;
 	float y = this->rowGrid * IMG_HEIGHT;
 	iconObj->setPosition(x, y);
-	iconObj->setScale(1.5f,1.5f);
+	iconObj->setScale(1.0f,1.0f);
 	//std::cout << "Set position: " << x << " " << y << std::endl;
 
 	/*

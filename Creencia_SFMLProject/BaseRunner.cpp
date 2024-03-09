@@ -28,7 +28,7 @@ BaseRunner::BaseRunner() :
 	GameObjectManager::getInstance()->addObject(bgObject);
 
 	LoadingScreen* loading = new LoadingScreen("LoadingScreen");
-	loading->setPosition(BaseRunner::WINDOW_WIDTH - 1820.f, BaseRunner::WINDOW_HEIGHT - 100.f);
+	loading->setPosition(BaseRunner::WINDOW_WIDTH - 900.f, BaseRunner::WINDOW_HEIGHT - 100.f);
 	loading->setScale(0.5, 0.5);
 	GameObjectManager::getInstance()->addObject(loading);
 	
@@ -63,6 +63,7 @@ BaseRunner::BaseRunner() :
 	KaraokeNumber* number = new KaraokeNumber();
 	GameObjectManager::getInstance()->addObject(number);
 
+	
 	
 }
 
@@ -135,8 +136,12 @@ void BaseRunner::render() {
 	this->window.clear();
 	GameObjectManager::getInstance()->draw(&this->window);
 
+
 	// Draw CD sprite
-	window.draw(logo);
+	if (TextureManager::getInstance()->getNumLoadedStreamTextures() != TextureManager::getInstance()->getStreamingAssetCount()) {
+		window.draw(logo);
+	}
+	
 	window.draw(cdSprite);
 
 	this->window.display();

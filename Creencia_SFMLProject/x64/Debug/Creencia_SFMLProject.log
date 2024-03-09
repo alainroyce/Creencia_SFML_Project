@@ -1,5 +1,2 @@
-﻿  TextureDisplay.cpp
-C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureDisplay.cpp(106,67): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureDisplay.cpp(111,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\TextureDisplay.cpp(112,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+﻿  BaseRunner.cpp
   Creencia_SFMLProject.vcxproj -> C:\Users\alain\source\repos\Creencia_SFMLProject\x64\Debug\Creencia_SFMLProject.exe
