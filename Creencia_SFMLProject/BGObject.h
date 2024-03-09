@@ -13,6 +13,8 @@ public:
 private:
 	const float SPEED_MULTIPLIER = 3000.0f;
 	sf::Music music;
+	sf::Music music2;
+
 	
 };
 

@@ -1,6 +1,8 @@
 #include "FPSCounter.h"
 #include <iostream>
 #include "BaseRunner.h"
+#include <sstream> 
+#include <iomanip>
 
 FPSCounter::FPSCounter() : AGameObject("FPSCounter")
 {
@@ -20,7 +22,7 @@ void FPSCounter::initialize()
 
     this->statsText = new sf::Text();
     this->statsText->setFont(*font);
-    this->statsText->setPosition(BaseRunner::WINDOW_WIDTH - 150, BaseRunner::WINDOW_HEIGHT - 70);
+    this->statsText->setPosition(BaseRunner::WINDOW_WIDTH - 180, BaseRunner::WINDOW_HEIGHT - 50);
     this->statsText->setOutlineColor(sf::Color(1.0f, 1.0f, 1.0f));
     this->statsText->setOutlineThickness(2.5f);
     this->statsText->setCharacterSize(35);
@@ -45,7 +47,9 @@ void FPSCounter::draw(sf::RenderWindow* targetWindow)
 
 void FPSCounter::updateFPS(sf::Time elapsedTime)
 {
-    this->statsText->setString("FPS: " + std::to_string(1.0/elapsedTime.asSeconds()) + "\n");
-   // std::cout << "FPS: " << 1.0 / elapsedTime.asSeconds() << std::endl;
+    std::stringstream fpsStream;
+    // Assuming you want to show two decimal places for the FPS value
+    fpsStream << std::fixed << std::setprecision(0) << "FPS: " << (1.0 / elapsedTime.asSeconds());
+    this->statsText->setString(fpsStream.str() + "\n");
 }
 

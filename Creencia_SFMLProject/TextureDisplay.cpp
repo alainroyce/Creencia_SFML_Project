@@ -9,11 +9,13 @@
 
 TextureDisplay::TextureDisplay() : AGameObject("TextureDisplay")
 {
-
+	
 }
+
 
 void TextureDisplay::initialize()
 {
+	
 
 }
 
@@ -28,9 +30,8 @@ void TextureDisplay::update(sf::Time deltaTime)
 	this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
 
 	if (TextureManager::getInstance()->getNumLoadedStreamTextures() == TextureManager::getInstance()->getStreamingAssetCount()) {
-		cout << "ALLASSETSLOADED" << endl;
+		//cout << "ALLASSETSLOADED" << endl;
 		this->onAllAssetsLoaded();
-
 	}
 	if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 	{
@@ -48,26 +49,48 @@ void TextureDisplay::update(sf::Time deltaTime)
 		TextureManager::getInstance()->loadSingleStreamAsset(this->numDisplayed, this);
 		this->numDisplayed++;
 	}
+
+	
 }
 
 void TextureDisplay::onAllAssetsLoaded()
 {
+
+
 	BGObject* bgobject = dynamic_cast<BGObject*>(GameObjectManager::getInstance()->findObjectByName("BGObject"));
 	
 
 	cout << "Displayed" << numDisplay << " / "  << numObjectsToSpawn << endl;
-	// Set the time interval between spawning each object
+	
 	static const sf::Time SPAWN_INTERVAL = sf::seconds(0.033f);
 
-	// Update the timer
+	
 	this->spawnTimer += BaseRunner::TIME_PER_FRAME;
 	String name = "Frame";
 	name = name + std::to_string(numDisplay);
-	// Check if it's time to spawn a new object
+
 	if (this->spawnTimer >= SPAWN_INTERVAL && numDisplay < numObjectsToSpawn) {
-		this->spawnObject(name); // Spawn a new object
-		numDisplay++; // Increment the count of displayed objects
-		this->spawnTimer = sf::Time::Zero; // Reset the spawn timer
+
+		
+		if (previousFrameName != "") 
+		{
+			this->spawnObject(name);
+			std::cout << "Before Active Objects: " << GameObjectManager::getInstance()->activeObjects() << std::endl;
+			GameObjectManager::getInstance()->deleteObjectByName(previousFrameName);
+			previousFrameName = name;
+			std::cout<< "After Active Objects: " << GameObjectManager::getInstance()->activeObjects() << std::endl;
+		}
+		else
+		{
+			this->spawnObject(name);
+			previousFrameName = name;
+		}
+		
+
+		//this->spawnObject(name);
+		numDisplay++;
+		
+		this->spawnTimer = sf::Time::Zero; 
 	}
 	else if (!loadDone)
 	{
@@ -98,6 +121,8 @@ void TextureDisplay::onFinishedExecution()
 	//this->spawnObject(); //executes spawn once the texture is ready.
 }
 
+
+
 void TextureDisplay::spawnObject(String name)
 {
 	this->guard.lock();
@@ -107,22 +132,15 @@ void TextureDisplay::spawnObject(String name)
 	this->iconList.push_back(iconObj);
 
 	//set position
-	int IMG_WIDTH = 1920; int IMG_HEIGHT = 1080;
+	int IMG_WIDTH = 1280; int IMG_HEIGHT = 720;
 	float x = this->columnGrid * IMG_WIDTH;
 	float y = this->rowGrid * IMG_HEIGHT;
 	iconObj->setPosition(x, y);
 	iconObj->setScale(1.0f,1.0f);
-	//std::cout << "Set position: " << x << " " << y << std::endl;
-
-	/*
-	this->columnGrid++;
-	if (this->columnGrid == this->MAX_COLUMN)
-	{
-		this->columnGrid = 0;
-		this->rowGrid++;
-	}
-	*/
+	
 	GameObjectManager::getInstance()->addObject(iconObj);
 
 	this->guard.unlock();
 }
+
+

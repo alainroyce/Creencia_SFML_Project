@@ -28,7 +28,7 @@ BaseRunner::BaseRunner() :
 	GameObjectManager::getInstance()->addObject(bgObject);
 
 	LoadingScreen* loading = new LoadingScreen("LoadingScreen");
-	loading->setPosition(BaseRunner::WINDOW_WIDTH - 900.f, BaseRunner::WINDOW_HEIGHT - 100.f);
+	loading->setPosition(BaseRunner::WINDOW_WIDTH - 100.f, BaseRunner::WINDOW_HEIGHT - 100.f);
 	loading->setScale(0.5, 0.5);
 	GameObjectManager::getInstance()->addObject(loading);
 	
@@ -51,7 +51,8 @@ BaseRunner::BaseRunner() :
 	}
 
 	logo.setTexture(logoTexture);
-	logo.setScale(0.5f, 0.5f);
+	logo.setScale(currentScale, currentScale);
+
 	velocity.x = 100.0f;
 	velocity.y = 100.0f;
 	
@@ -114,21 +115,66 @@ void BaseRunner::processEvents()
 }
 
 void BaseRunner::update(sf::Time elapsedTime) {
+	
+	
 	GameObjectManager::getInstance()->update(elapsedTime);	
+	
+	
 
-	// Update logo position
-	logo.move(velocity * elapsedTime.asSeconds());
+	
+	if (TextureManager::getInstance()->getNumLoadedStreamTextures() != TextureManager::getInstance()->getStreamingAssetCount() && TextureManager::getInstance()->getNumLoadedStreamTextures() >= 1680 && TextureManager::getInstance()->getNumLoadedStreamTextures() < 1850) {
+		currentScale += elapsedTime.asSeconds() / 1.5;
+		logo.setScale(currentScale,currentScale);
+		logo.setOrigin(logoTexture.getSize().x / 2.f, logoTexture.getSize().y / 2.f);
+		logo.setPosition(BaseRunner::WINDOW_WIDTH / 2, BaseRunner::WINDOW_HEIGHT / 2);
+	}
+	else if (TextureManager::getInstance()->getNumLoadedStreamTextures() != TextureManager::getInstance()->getStreamingAssetCount() && TextureManager::getInstance()->getNumLoadedStreamTextures() >= 1850)
+	{
 
-	// Check for bounds collision and reverse velocity if needed
+		AGameObject* bgObject = GameObjectManager::getInstance()->findObjectByName("BGObject");
+		AGameObject* disc = GameObjectManager::getInstance()->findObjectByName("LoadingScreen");
+		AGameObject* bar = GameObjectManager::getInstance()->findObjectByName("LoadingBar");
+
+		AGameObject* home = GameObjectManager::getInstance()->findObjectByName("HomeText");
+
+
+
+		if (bgObject != nullptr || disc != nullptr || bar != nullptr) {
+			bgObject->setScale(0.0f, 0.0f);
+			disc->setScale(0.0f, 0.0f);
+			bar->setScale(0.0f, 0.0f);
+		
+			home->setScale(0.0f, 0.0f);
+		}
+
+		currentScale -= elapsedTime.asSeconds()/2 ;
+		logo.setScale(currentScale, currentScale);
+		logo.setOrigin(logoTexture.getSize().x / 2.f, logoTexture.getSize().y / 2.f);
+		logo.setPosition(BaseRunner::WINDOW_WIDTH / 2, BaseRunner::WINDOW_HEIGHT / 2);
+
+	}
+	else {
+
+		logo.move(velocity * elapsedTime.asSeconds());
+	}
+	
+
+
 	if ((logo.getPosition().x + logo.getGlobalBounds().width >= WINDOW_WIDTH && velocity.x > 0) ||
 		(logo.getPosition().x <= 0 && velocity.x < 0)) {
-		velocity.x = -velocity.x; // Reverse X direction
+		velocity.x = -velocity.x; 
 	}
 	if ((logo.getPosition().y + logo.getGlobalBounds().height >= WINDOW_HEIGHT && velocity.y > 0) ||
 		(logo.getPosition().y <= 0 && velocity.y < 0)) {
-		velocity.y = -velocity.y; // Reverse Y direction
+		velocity.y = -velocity.y; 
 	}
 
+	if (TextureManager::getInstance()->getNumLoadedStreamTextures() == TextureManager::getInstance()->getStreamingAssetCount()) {
+	
+		
+		
+	}
+	
 	
 }
 
@@ -136,13 +182,18 @@ void BaseRunner::render() {
 	this->window.clear();
 	GameObjectManager::getInstance()->draw(&this->window);
 
-
-	// Draw CD sprite
 	if (TextureManager::getInstance()->getNumLoadedStreamTextures() != TextureManager::getInstance()->getStreamingAssetCount()) {
 		window.draw(logo);
+
 	}
+
+	
+	
 	
 	window.draw(cdSprite);
+
+	
+	
 
 	this->window.display();
 }

@@ -22,7 +22,7 @@ TextureManager* TextureManager::getInstance() {
 TextureManager::TextureManager()
 {
 	this->countStreamingAssets();
-
+	
 }
 
 void TextureManager::loadFromAssetList()

@@ -7,7 +7,7 @@ class BaseRunner : private sf::NonCopyable
 public:
 	static const sf::Time	TIME_PER_FRAME;
 	static const int WINDOW_WIDTH = 1280;
-	static const int WINDOW_HEIGHT = 720;
+	static const int WINDOW_HEIGHT = 780;
 
 	BaseRunner();
 	void run();
@@ -25,6 +25,8 @@ private:
 
 	int displayValue = 0;
 	int digits[4] = { 0 }; // Array to store individual digits of the displayValue
+
+	float currentScale = 0.5;
 
 	// Other members of the class...
 

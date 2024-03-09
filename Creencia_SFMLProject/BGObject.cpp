@@ -9,7 +9,12 @@ BGObject::BGObject(string name) : AGameObject(name)
 
 void BGObject::initialize()
 {
-	
+	//std::cout << "Playing" << std::endl;
+	if (!this->music2.openFromFile("C:\\Users\\alain\\source\\repos\\Creencia_SFMLProject\\Creencia_SFMLProject\\Media\\Audio\\budots.ogg"))
+		std::cout << "Audio file not found!";
+	this->music2.setLoop(true);
+	this->music2.setVolume(10);
+	this->music2.play();
 	std::cout << "Declared as " << this->getName() << "\n";
 
 	//assign texture
@@ -30,15 +35,20 @@ void BGObject::processInput(sf::Event event)
 void BGObject::update(sf::Time deltaTime)
 {
 	if (isPlay) {
-		
-		std::cout << "Playing" << std::endl;
+		this->music2.stop();
+		//std::cout << "Playing" << std::endl;
 		if (!this->music.openFromFile("C:\\Users\\alain\\source\\repos\\Creencia_SFMLProject\\Creencia_SFMLProject\\Media\\Audio\\magbalik.ogg"))
 			std::cout << "Audio file not found!";
 		this->music.setLoop(false);
 		this->music.setVolume(50);
 		this->music.play();
+		
 		isPlay = false;
 	}
+	
+	
+		
+	
 	//make BG scroll slowly
 	sf::Vector2f position = this->getPosition();
 	position.y += 100 * deltaTime.asSeconds();

@@ -13,11 +13,13 @@ class TextureDisplay : public AGameObject, public IExecutionEvent
 {
 public:
 	TextureDisplay();
+
 	void initialize();
 	void processInput(sf::Event event);
 	void update(sf::Time deltaTime);
 	void onAllAssetsLoaded();
 	void onFinishedExecution() override;
+
 
 private:
 	typedef std::vector<IconObject*> IconList;
@@ -41,4 +43,10 @@ private:
 	void spawnObject(String name);
 
 	bool loadDone = false;
+
+	bool deleted = false;
+
+	String previousFrameName = "";
+
+
 };

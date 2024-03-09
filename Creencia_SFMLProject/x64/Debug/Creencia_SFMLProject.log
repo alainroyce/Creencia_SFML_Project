@@ -1,2 +1,3 @@
 ﻿  BaseRunner.cpp
+C:\Users\alain\source\repos\Creencia_SFMLProject\Creencia_SFMLProject\BaseRunner.cpp(126,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   Creencia_SFMLProject.vcxproj -> C:\Users\alain\source\repos\Creencia_SFMLProject\x64\Debug\Creencia_SFMLProject.exe
